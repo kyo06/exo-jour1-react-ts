@@ -1,5 +1,6 @@
 import './App.css'
-import { deleteTodo, fetchTodos, postTodo } from './services/todo.service'
+import { deleteTodo, postTodo } from './services/todo.service'
+import { fetchTodos } from './services/todo.api.service'
 import TodoList from './components/TodoList'
 import type { Todo } from './types/todo';
 import { useEffect, useState } from 'react';
