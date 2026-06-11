@@ -14,29 +14,33 @@ export const fetchTodos = (): Promise<Todo[]> => {
     });
 };
 
-/*
 export const postTodo = (newTodo: Omit<Todo, 'id'>): Promise<Todo> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-        const todoWithId: Todo = {
-            id: initialTodos.length > 0 ? initialTodos[initialTodos.length - 1].id + 1 : 1,
-            ...newTodo
-        };
-        initialTodos.push(todoWithId);
-        resolve(todoWithId)
-    }, 500)
+  return new Promise((resolve, reject) => { 
+    fetch(API_URL, {
+        method: 'POST',
+        headers: {  
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newTodo)
+    })
+    .then(response => response.json())
+    .then(data => resolve(data))
+    .catch(error => {
+        console.error('Erreur lors de l\'ajout de la todo :', error);
+        reject(error);
+    });
   })
 };
 
 export const deleteTodo = (id: number): Promise<void> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-        const index = initialTodos.findIndex(todo => todo.id === id);
-        if (index !== -1) {
-            initialTodos.splice(index, 1);
-        }
-        resolve();
-    }, 500)
-  });
+  return new Promise((resolve, reject) => {
+    fetch(`${API_URL}/${id}`, {
+        method: 'DELETE'
+    })
+    .then(() => resolve())
+    .catch(error => {
+        console.error('Erreur lors de la suppression de la todo :', error);
+        reject(error); // Rejeter l'erreur
+    });
+  })
 };
-*/

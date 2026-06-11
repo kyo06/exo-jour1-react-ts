@@ -1,5 +1,15 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@components/*": ["./src/components/*"], // enables us to use @components/MyComponent
+      "@services/*": ["./src/services/*"], // enables us to use @services/myService
+      "@assets/*": ["./src/assets/*"], // enables us to use @assets/myImage.png
+      "@types/*": ["./src/types/*"], // enables us to use @types/my
+      "@utils/*": ["./src/utils/*"], // enables us to use @utils/myUtil
+      "@hooks/*": ["./src/hooks/*"], // enables us to use @hooks/myHook
+      "@pages/*": ["./src/pages/*"], // enables us to use @pages/MyPage
+      "@/*": ["./src/*"] // enables us to use @/MyComponent for any file in src
+    },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "es2023",
     "lib": ["ES2023", "DOM"],
