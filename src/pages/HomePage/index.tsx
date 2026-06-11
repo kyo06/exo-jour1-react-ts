@@ -2,6 +2,7 @@ import { API_URL, postTodo, deleteTodo } from '@services/todo.api.service'
 import TodoList from '@components/TodoList'
 import type { Todo } from '@/types/todo';
 import useFetch from '@hooks/useFetch';
+import Header from '@components/Header';
 
 export default function HomePage() {
 
@@ -21,14 +22,17 @@ export default function HomePage() {
   }
 
   return (
-    <div className="App">
-      {loading ? (
-        <p>Chargement...</p>
-      ) : error ? (
-        <p>Erreur : {error.message}</p>
-      ) : (
-        <TodoList todos={todos!} addTodo={handleAddTodo} deleteTodo={handleDeleteTodo} />
-      )}
-    </div>
+    <>
+      <div className="App">
+        <Header />
+        {loading ? (
+          <p>Chargement...</p>
+        ) : error ? (
+          <p>Erreur : {error.message}</p>
+        ) : (
+          <TodoList todos={todos!} addTodo={handleAddTodo} deleteTodo={handleDeleteTodo} />
+        )}
+      </div>
+    </>
   )
 }
