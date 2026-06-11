@@ -1,6 +1,6 @@
 import type { Todo } from '../types/todo'
 
-const API_URL = 'http://localhost:3000/todos';
+export const API_URL = 'http://localhost:3000/todos';
 
 export const fetchTodos = (): Promise<Todo[]> => {
   return new Promise((resolve) => {

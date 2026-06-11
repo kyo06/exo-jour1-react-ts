@@ -3,7 +3,7 @@ import './App.css'
 import useLocalStorage from '@hooks/useLocalStorage'
 
 function App() {
-  const [todos, setTodos] = useLocalStorage('todos', []);
+  const [todos] = useLocalStorage('todos', []);
  
   console.log(todos, 'depuis App');
 

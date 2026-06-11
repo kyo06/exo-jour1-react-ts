@@ -1,7 +1,7 @@
 import useLocalStorage from '@hooks/useLocalStorage'
 
 export default function ContactPage() {
-  const [todos, setTodos] = useLocalStorage('todos', []);
+  const [todos] = useLocalStorage('todos', []);
 
   console.log(todos, 'depuis ContactPage');
 

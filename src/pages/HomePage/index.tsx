@@ -1,49 +1,34 @@
-import { fetchTodos, deleteTodo, postTodo } from '@services/todo.api.service'
+import { API_URL, postTodo, deleteTodo } from '@services/todo.api.service'
 import TodoList from '@components/TodoList'
-import type { Todo } from '@types/todo';
-import { useEffect, useState } from 'react';
+import type { Todo } from '@/types/todo';
+import useFetch from '@hooks/useFetch';
 
 export default function HomePage() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  function loadTodos() {
-    setLoading(true);
-    fetchTodos().then(data => {
-        console.log('Todos chargés :', data)
-        setTodos(data);
-        setLoading(false);
-    })
-  };
+  const { data: todos, loading, error, refetch: refetchTodos } = useFetch<Todo[]>(API_URL);
 
-  // Chargement initial des todos
-  useEffect(() => {
-    loadTodos();
-  }, []);
-
-
-  function handleAddTodo(todo: Omit<Todo, 'id'>) {  
-      postTodo(todo).then(_ => {
-          loadTodos();
-      });
+  function handleDeleteTodo(id: number): void {
+    deleteTodo(id).then(() => refetchTodos());
   }
 
-  /*
-  async function handleAddTodoAsync(todo: Omit<Todo, 'id'>) {  
-      const newTodo = await postTodo(todo);
-      await loadTodos();
-  }
-  */
-
-  function handleDeleteTodo(id: number) {
-      deleteTodo(id).then(() => {
-          loadTodos();
-      });
+  function handleAddTodo(todo: Omit<Todo, 'id'>): void {
+    postTodo(todo).then(newTodo => {
+      if (newTodo) {
+        // La nouvelle todo a été ajoutée avec succès, on peut recharger la liste des todos
+        refetchTodos();
+      }
+    });
   }
 
   return (
     <div className="App">
-      {loading ? <p>Chargement...</p> : <TodoList todos={todos} addTodo={handleAddTodo} deleteTodo={handleDeleteTodo} />}
+      {loading ? (
+        <p>Chargement...</p>
+      ) : error ? (
+        <p>Erreur : {error.message}</p>
+      ) : (
+        <TodoList todos={todos!} addTodo={handleAddTodo} deleteTodo={handleDeleteTodo} />
+      )}
     </div>
   )
 }
