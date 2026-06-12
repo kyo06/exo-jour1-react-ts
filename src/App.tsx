@@ -6,7 +6,8 @@ import { useReducer } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router';
 import ContactPage from '@pages/ContactPage';
 import NotFoundPage from '@pages/NotFoundPage';
-import TodoPage from '@pages/TodoPage';
+import TodoListPage from '@pages/TodoListPage';
+import TodoItemPage from '@pages/TodoItemPage';
 
 function initStore() {
   const saved = localStorage.getItem("todos");
@@ -41,7 +42,14 @@ function App() {
       </nav>
         <Routes>
           <Route path="/" element={<HomePage/>} />
-          <Route path="/todos" element={<TodoPage/>} />
+          <Route path="/todos" element={<TodoListPage/>} />
+          <Route path="/todos/:id" element={<TodoItemPage/>} />
+          {/*
+          <Route path="/todos" element={<TodoLayout/>}>
+            <Route index element={<TodoListPage/>} />          
+            <Route path=":id" element={<TodItemPage/>} />
+          </Route>          
+          */}
           <Route path="/contact" element={<ContactPage/>} />
           <Route path="*" element={<NotFoundPage/>} />
         </Routes>
