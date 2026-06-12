@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { TodoState } from '@/redux/reducers';
 // import { addTodo, deleteTodo } from '@/redux/actions';
 import type { RootState } from '@/redux-toolkit/store'
-import { addTodo, deleteTodo } from '@/redux-toolkit/slice';
+import { addTodo, deleteTodo, toggleTodo } from '@/redux-toolkit/slice';
 
 
 export default function HomePage() {
@@ -24,6 +24,10 @@ export default function HomePage() {
     dispatch(deleteTodo(id))
   }
 
+  function handleToogleTodo(id: number) {
+    dispatch(toggleTodo(id))
+  }
+
   return (
     <>
       <div className="App">
@@ -34,8 +38,13 @@ export default function HomePage() {
         <ul>
         {todos.map((t: Todo) => (
           <li key={t.id}>
-            {t.text}
-            <button onClick={() => removeTodo(t.id)}>Supprimer</button>
+            <span
+              onClick={() => dispatch(toggleTodo(t.id))}
+              style={{ textDecoration: t.completed ? "line-through" : "none" }}
+            >
+              {t.text}
+            </span>
+            <button onClick={() => removeTodo(t.id)}>❌</button>
           </li>
         ))}
       </ul>
