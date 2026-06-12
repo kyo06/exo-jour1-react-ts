@@ -1,3 +1,5 @@
+'use client'
+
 import HomePage from '@pages/HomePage'
 import './App.css'
 import useLocalStorage from '@hooks/useLocalStorage'

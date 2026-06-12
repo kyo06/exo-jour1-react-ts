@@ -1,6 +1,7 @@
 import type { Todo } from '../types/todo'
 
-export const API_URL = 'http://localhost:3000/todos';
+//Variable d'environnement doit commencer par VITE_ pour être connu par tous les fichiers du projet
+export const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchTodos = (): Promise<Todo[]> => {
   return new Promise((resolve) => {
