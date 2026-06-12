@@ -1,4 +1,7 @@
-export default function HomePage() {
+import { withAppErrorBoundary } from '@/hoc/withAppErrorBoundary'
+
+function HomePage() {
+    throw Error('WAZAAAAAAAAAAAAAAAAA');
     return (
         <>
         <p>
@@ -7,3 +10,5 @@ export default function HomePage() {
         </>
     )
 }
+
+export default withAppErrorBoundary(HomePage);
