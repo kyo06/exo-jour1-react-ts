@@ -3,6 +3,10 @@ import './App.css'
 import useLocalStorage from '@hooks/useLocalStorage'
 import { todoReducer, initialState } from './redux/reducers';
 import { useReducer } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router';
+import ContactPage from '@pages/ContactPage';
+import NotFoundPage from '@pages/NotFoundPage';
+import TodoPage from '@pages/TodoPage';
 
 function initStore() {
   const saved = localStorage.getItem("todos");
@@ -29,7 +33,20 @@ function App() {
 
   return (
     <>
-      <HomePage/>
+      <BrowserRouter>
+      <nav>
+          <Link to="/">Home</Link>{" "}
+          <Link to="/contact">Contact</Link>{" "}
+          <Link to="/todos">Todos</Link>
+      </nav>
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/todos" element={<TodoPage/>} />
+          <Route path="/contact" element={<ContactPage/>} />
+          <Route path="*" element={<NotFoundPage/>} />
+        </Routes>
+
+      </BrowserRouter>
     </>
   )
 }
