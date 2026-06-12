@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -12,7 +12,15 @@ export default defineConfig({
       gzipSize: true,
       brotliSize: true
     })
-  ],
+  ],  
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/setupTests.ts',
+    coverage: {
+      provider: 'v8',
+    },
+  },
   build: {
     rollupOptions: {
       output: {
