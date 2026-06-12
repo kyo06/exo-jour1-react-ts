@@ -9,7 +9,7 @@ export interface TodoState {
 // État initial de l'application avec une liste de todos pré-remplie
 // Mettre dans le reducer pour que ce soit plus clair et éviter les problèmes de circular dependencies
 
-const initialState: TodoState = {
+export const initialState: TodoState = {
     todos: [
         { id: 1, text: 'Apprendre React', completed: false },
         { id: 2, text: 'Apprendre TypeScript', completed: false },
@@ -19,7 +19,7 @@ const initialState: TodoState = {
 
 
 
-export function todoReducer(state = initialState, action: ActionType) {
+export function todoReducer(state = initialState, action: ActionType): TodoState {
     switch (action.type) {
         case ADD_TODO:
             console.log('original state', state);
