@@ -1,5 +1,5 @@
 import type { Todo } from '@/types/todo';
-import { ADD_TODO } from '@/redux/actions'
+import { ADD_TODO, DELETE_TODO, type ActionType } from '@/redux/actions'
 
 
 export interface TodoState {
@@ -19,7 +19,7 @@ const initialState: TodoState = {
 
 
 
-export function todoReducer(state = initialState, action: any) {
+export function todoReducer(state = initialState, action: ActionType) {
     switch (action.type) {
         case ADD_TODO:
             console.log('original state', state);
@@ -32,6 +32,11 @@ export function todoReducer(state = initialState, action: any) {
             return {
                 ...state,
                 todos: [...state.todos, newTodo]
+            };
+        case DELETE_TODO:
+            return {
+                ...state,
+                todos: state.todos.filter(todo => todo.id !== action.payload)
             };
         default:
             return state;
