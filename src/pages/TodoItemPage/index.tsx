@@ -1,7 +1,7 @@
 import type { RootState } from "@/redux-toolkit/store";
 import type { Todo } from "@/types/todo";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 
 
 export default function TodoItemPage() {
@@ -12,8 +12,7 @@ export default function TodoItemPage() {
     const todoItem = useSelector((state: RootState) => state.todos.todos.find( todo => todo.id === todoId));
     
     if(!todoItem) {
-        const navigate = useNavigate();
-        return navigate('/404');
+        return (<Navigate to="/404" />);
     }
 
     return (
