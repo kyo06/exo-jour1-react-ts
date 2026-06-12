@@ -1,7 +1,7 @@
 import type { Todo } from '@/types/todo';
 import Header from '@components/Header';
 import { useDispatch, useSelector } from 'react-redux';
-import type { TodoState } from '@/redux/reducers';
+// import type { TodoState } from '@/redux/reducers';
 // import { addTodo, deleteTodo } from '@/redux/actions';
 import type { RootState } from '@/redux-toolkit/store'
 import { addTodo, deleteTodo, toggleTodo } from '@/redux-toolkit/slice';
@@ -25,10 +25,12 @@ export default function TodoListPage() {
     dispatch(deleteTodo(id))
   }
 
+  /*
   function handleToogleTodo(id: number) {
     dispatch(toggleTodo(id))
   }
-
+  */
+ 
   return (
     <>
       <div className="App">

@@ -1,5 +1,5 @@
 import type { RootState } from "@/redux-toolkit/store";
-import type { Todo } from "@/types/todo";
+// import type { Todo } from "@/types/todo";
 import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router";
 

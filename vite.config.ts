@@ -1,10 +1,34 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),  
+    visualizer({
+      open: true,
+      gzipSize: true,
+      brotliSize: true
+    })
+  ],
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        manualChunks(id) {
+          if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+            return 'reactVendor';
+          }
+          if (id.includes('@reduxjs/toolkit') || id.includes('react-redux')) {
+            return 'reduxVendor';
+          }
+        }
+      }
+    }
+  },
   resolve: {
     alias: [
       { find: '@components', replacement: resolve(__dirname, 'src/components') },
