@@ -2,11 +2,15 @@ import type { Todo } from '@/types/todo';
 import Header from '@components/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import type { TodoState } from '@/redux/reducers';
-import { addTodo, deleteTodo } from '@/redux/actions';
+// import { addTodo, deleteTodo } from '@/redux/actions';
+import type { RootState } from '@/redux-toolkit/store'
+import { addTodo, deleteTodo } from '@/redux-toolkit/slice';
+
 
 export default function HomePage() {
   //Récupére le state todo dans la store
-  const todos = useSelector((state: TodoState) => state.todos);
+  // dans redux-toolkit il y a le nom de la store et donc il y a une indirection en plus
+  const todos = useSelector((state: RootState) => state.todos.todos);
   
   //Dispatch les actions
   const dispatch = useDispatch();

@@ -4,7 +4,8 @@ import './index.css'
 import App from './App.tsx'
 import { ThemeProvider } from '@hooks/useTheme.ts'
 import { Provider } from 'react-redux'
-import { store } from '@/redux/store'
+// import { store } from '@/redux/store' // --> redux store
+import { store } from '@/redux-toolkit/store' // --> redux-toolkit store
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
